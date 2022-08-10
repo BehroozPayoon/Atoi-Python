@@ -4,6 +4,7 @@ import sys
 def atoi_parser(input_str: str):
     result = ""
     is_positive = True
+    is_sign_checked = False
     for char in input_str:
         if check_is_white_space(char):
             continue
@@ -12,10 +13,15 @@ def atoi_parser(input_str: str):
             if len(result) > 0:
                 break
 
+            if is_sign_checked and (char == "-" or char == "+"):
+                break
+            
             if char == "-":
                 is_positive = False
+                is_sign_checked = True
             elif char == "+":
                 is_positive = True
+                is_sign_checked = True
             else:
                 break
 
