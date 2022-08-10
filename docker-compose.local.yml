@@ -1,0 +1,20 @@
+version: "3"
+services:
+  app:
+    image: atoi:latest
+    networks:
+      - frontend
+    volumes:
+      - ./:/app
+    command: python app/main.py 
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.atoi-api-secure.rule=Host(`payoon.dev`)'
+      - 'traefik.http.services.atoi-api.loadbalancer.server.port=8000'
+      - 'traefik.http.routers.atoi-api-secure.tls=true'
+      - "traefik.http.routers.atoi-api-secure.tls.certresolver=le"
+    env_file:
+      - ./.env
+networks:
+  frontend:
+    external: true

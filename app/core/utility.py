@@ -1,8 +1,7 @@
 import sys
 
 
-def atoi():
-    input_str = input("Entrer you desired str: ")
+def atoi_parser(input_str: str):
     result = ""
     is_positive = True
     for char in input_str:
@@ -30,7 +29,9 @@ def atoi():
     else:
         result = check_underflow(result)
 
-    print(result if is_positive else f"-{result}")
+    if len(result) == 0:
+        return "0"
+    return result if is_positive else f"-{result}"
 
 
 def check_is_white_space(char):
@@ -77,6 +78,3 @@ def check_underflow(result):
                 return min_int
 
     return result
-
-
-atoi()
